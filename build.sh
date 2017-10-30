@@ -1,2 +1,2 @@
-gcc -I inc/ src/*.c -o exe/test01.elf -lfftw3 -lm
-
+gcc -I inc/ src/*.c -o exe/test_imag.elf -lfftw3 -lm
+echo ".."

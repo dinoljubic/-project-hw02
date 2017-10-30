@@ -14,7 +14,7 @@ void cmplx_mul(fftw_complex a, fftw_complex b, fftw_complex *c){
 }
 
 double cmplx_mag(fftw_complex a){
-	return sqrt(a[0]*a[0]+a[1]+a[1]);
+	return sqrt(a[0]*a[0]+a[1]*a[1]);
 }
 
 double cmplx_phs(fftw_complex a){
