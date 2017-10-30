@@ -9,19 +9,24 @@ CFLAGS=-I $(INC)
 
 EXE=$(patsubst tst/%.c, exe/%.elf, $(TST))
 
+define \n
+
+
+endef
+
 .SECONDARY:
 
 all: $(EXE)
 
 
-%.elf: $(OSRC) tst/%.o
-	gcc $(OSRC) $(patsubst %.elf, tst/%.o, $@) -o exe/$@ -lm -lfftw3
+exe/%.elf: $(OSRC) tst/%.o
+	gcc $(OSRC) $(patsubst exe/%.elf, tst/%.o, $@) -o $@ -lm -lfftw3
 
 %.o: %.c
 	gcc -c $< $(CFLAGS) -o $@
 
 clean:
-	rm -f $(OBJ) $(EXE)
+	rm -f $(OBJ) exe/*.elf
 
 run:	all
 	

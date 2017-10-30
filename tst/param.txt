@@ -1,6 +1,0 @@
-exe/test_div.elf 1 2 3 4
-exe/test_mul.elf 1 2 3 4
-exe/test_phs.elf 2 3
-exe/test_real.elf 2 3
-exe/test_mag.elf 2 3
-exe/test_imag.elf 2 3
