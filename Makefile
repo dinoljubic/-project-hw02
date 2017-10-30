@@ -1,33 +1,30 @@
-SRC=$(wildcard src/*.c)
-TST=$(wildcard tst/*.c)
-OSRC=$(patsubst %.c, %.o, $(SRC))
-OTST=$(patsubst %.c, %.o, $(TST))
-OBJ=$(OSRC) $(OTST)
+include config.mk
 
-INC=inc/
-CFLAGS=-I $(INC)
+PROJECT_PATH=$(shell pwd)
+export PROJECT_PATH
 
-EXE=$(patsubst tst/%.c, exe/%.elf, $(TST))
-
-define \n
+SORCS=$(PROJECT_PATH)/src
+MAINS=$(PROJECT_PATH)/tst
+EXECS=$(PROJECT_PATH)/exe
 
 
-endef
 
 .SECONDARY:
 
-all: $(EXE)
+all: mains
+	#to be added
 
-
-exe/%.elf: $(OSRC) tst/%.o
-	gcc $(OSRC) $(patsubst exe/%.elf, tst/%.o, $@) -o $@ -lm -lfftw3
-
-%.o: %.c
-	gcc -c $< $(CFLAGS) -o $@
+mains: sources
+	$(foreach main, $(MAINS), $(MAKE) -C $(main) all &&) 		true
+	
+sources: $(PATHS)
+	$(foreach path,$(SORCS),$(MAKE) -C $(path) &&) true
 
 clean:
-	rm -f $(OBJ) exe/*.elf
+	$(foreach path,$(SORCS) $(MAINS),$(MAKE) -C $(path) 		clean &&) true
+	rm -rf exe/*.elf
 
 run:	all
+	
 	
 	
