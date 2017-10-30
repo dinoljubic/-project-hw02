@@ -14,8 +14,8 @@ EXE=$(patsubst tst/%.c, exe/%.elf, $(TST))
 all: $(EXE)
 
 
-exe/%.elf: $(OSRC) tst/%.o
-	gcc $(OSRC) $(patsubst exe/%.elf, tst/%.o, $@) -o $@ -lm -lfftw3
+%.elf: $(OSRC) tst/%.o
+	gcc $(OSRC) $(patsubst %.elf, tst/%.o, $@) -o exe/$@ -lm -lfftw3
 
 %.o: %.c
 	gcc -c $< $(CFLAGS) -o $@
